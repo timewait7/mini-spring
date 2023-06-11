@@ -1,4 +1,4 @@
-package com.tw.minispring.ioc;
+package com.tw.minispring.ioc.service;
 
 /**
  * @Author: linfeng
