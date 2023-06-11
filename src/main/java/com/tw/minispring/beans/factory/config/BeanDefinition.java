@@ -1,6 +1,6 @@
 package com.tw.minispring.beans.factory.config;
 
-import com.tw.minispring.PropertyValues;
+import com.tw.minispring.beans.PropertyValues;
 
 public class BeanDefinition {
 

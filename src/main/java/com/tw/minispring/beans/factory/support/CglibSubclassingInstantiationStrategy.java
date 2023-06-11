@@ -1,6 +1,6 @@
 package com.tw.minispring.beans.factory.support;
 
-import com.tw.minispring.BeansException;
+import com.tw.minispring.beans.BeansException;
 import com.tw.minispring.beans.factory.config.BeanDefinition;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;

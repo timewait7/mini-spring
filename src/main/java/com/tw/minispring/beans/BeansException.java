@@ -1,4 +1,4 @@
-package com.tw.minispring;
+package com.tw.minispring.beans;
 
 public class BeansException extends RuntimeException {
 

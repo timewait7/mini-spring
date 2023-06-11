@@ -1,8 +1,8 @@
 package com.tw.minispring.beans.factory.support;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.tw.minispring.BeansException;
-import com.tw.minispring.PropertyValue;
+import com.tw.minispring.beans.BeansException;
+import com.tw.minispring.beans.PropertyValue;
 import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.config.BeanReference;
 

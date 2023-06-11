@@ -1,7 +1,7 @@
 package com.tw.minispring.ioc;
 
-import com.tw.minispring.PropertyValue;
-import com.tw.minispring.PropertyValues;
+import com.tw.minispring.beans.PropertyValue;
+import com.tw.minispring.beans.PropertyValues;
 import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.config.BeanReference;
 import com.tw.minispring.beans.factory.support.DefaultListableBeanFactory;

@@ -1,4 +1,6 @@
-package com.tw.minispring;
+package com.tw.minispring.beans;
+
+import com.tw.minispring.beans.PropertyValue;
 
 import java.util.ArrayList;
 import java.util.List;
