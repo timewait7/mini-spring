@@ -13,3 +13,16 @@ bean的定义和注册，主要增加如下类：
 
 ![](./assets/DefaultListableBeanFactory.png)
 
+### 03-instantiation-strategy
+beanClass.newInstance只能用来实例化有无参构造函数的bean，为了让bean的实例化更具扩展性，定义一个实例化接口InstantiationStrategy，bean的实例化交由InstantiationStrategy的子类来实现。
+- InstantiationStrategy：根据bean定义来实例化bean的接口
+- SimpleInstantiationStrategy：默认实现，根据bean的无参构造函数实例化bean
+- CglibSubclassingInstantiationStrategy：使用CGLIB动态生成子类来实例化bean
+
+![](./assets/InstantiationStrategy.png)
+
+todo：
+- 补充CGLIB细节
+
+
+
