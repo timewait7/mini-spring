@@ -1,6 +1,7 @@
 package com.tw.minispring.ioc;
 
-import com.tw.minispring.beans.factory.BeanFactory;
+import com.tw.minispring.beans.factory.config.BeanDefinition;
+import com.tw.minispring.beans.factory.support.DefaultListableBeanFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,10 +20,15 @@ public class BeanFactoryTest {
 //        assertThat(helloService.sayHello()).isEqualTo("hello");
     }
 
-    class HelloService {
-        public String sayHello() {
-            System.out.println("hello");
-            return "hello";
-        }
+    @Test
+    public void testGetBean2() throws Exception {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+
+        BeanDefinition beanDefinition = new BeanDefinition(HelloService.class);
+        beanFactory.registerBeanDefinition("helloService", beanDefinition);
+
+        HelloService helloService = (HelloService) beanFactory.getBean("helloService");
+        assertThat(helloService).isNotNull();
+        helloService.sayHello();
     }
 }
