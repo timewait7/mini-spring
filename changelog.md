@@ -24,10 +24,14 @@ beanClass.newInstance只能用来实例化有无参构造函数的bean，为了�
 todo：
 - 补充CGLIB细节
 
+### 04-populate-bean-with-property-values
+bean实例化后需要设置属性，定义PropertyValues来对应bean的属性。
+- PropertyValue：对应bean的属性名和属性值
+- PropertyValues：用来统一管理一个bean的所有属性
+- BeanDefinition：新增PropertyValues字段
+- AbstractAutowireCapableBeanFactory：新增applyPropertyValues方法，更新doCreateBean，创建bean后，调用applyPropertyValues设置属性
+
 ### 05-populate-bean-with-bean
 增加BeanReference类，包装一个bean对另一个bean的引用。
 实例化beanA后填充属性时，若Property#value为BeanReference，引用beanB，先实例化beanB。暂不支持循环依赖。
 - BeanReference：只有一个字段beanName
-
-
-
