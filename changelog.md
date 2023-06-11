@@ -24,5 +24,10 @@ beanClass.newInstance只能用来实例化有无参构造函数的bean，为了�
 todo：
 - 补充CGLIB细节
 
+### 05-populate-bean-with-bean
+增加BeanReference类，包装一个bean对另一个bean的引用。
+实例化beanA后填充属性时，若Property#value为BeanReference，引用beanB，先实例化beanB。暂不支持循环依赖。
+- BeanReference：只有一个字段beanName
+
 
 
