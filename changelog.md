@@ -1,12 +1,15 @@
 ### 01-simple-bean-container
 定义一个最简单的容器BeanFactory，内部用一个map来保存bean，只有注册bean和获取bean两个方法。
 
-新建：
-- BeanFactory
-  - registerBean
-  - getBean
-- BeanFactoryTest
-  - testGetBean
+### 02-bean-definition-and-registry
+bean的定义和注册，主要增加如下类：
+- BeanDefinition：定义bean信息的类，包含bean的Class类型、属性值等信息
+- BeanDefinitionRegistry：注册bean定义的接口
+- SingletonBeanRegistry：注册单例bean的接口
+- DefaultSingletonBeanRegistry：注册单例bean的默认实现类
+- AbstractBeanFactory：提供获取bean的能力
+- AbstractAutowireCapableBeanFactory：提供根据bean定义创建bean的能力
+- DefaultListableBeanFactory：继承AbstractAutowireCapableBeanFactory、实现BeanDefinitionRegistry，具备注册bean定义、根据bean定义创建bean、获取bean的能力
 
-更新：
+![](./assets/DefaultListableBeanFactory.png)
 
