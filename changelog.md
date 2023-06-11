@@ -35,3 +35,12 @@ bean实例化后需要设置属性，定义PropertyValues来对应bean的属性�
 增加BeanReference类，包装一个bean对另一个bean的引用。
 实例化beanA后填充属性时，若Property#value为BeanReference，引用beanB，先实例化beanB。暂不支持循环依赖。
 - BeanReference：只有一个字段beanName
+
+### 06-resource-and-resource-loader
+定义资源和资源加载器：
+- Resource：资源类，只有一个方法，getInputStream
+- ClasspathResource：classpath下的资源
+- FileSystemResource：文件系统下的资源
+- UrlResource：网络资源
+- ResourceLoader：资源加载器，根据给定位置获取资源
+- DefaultResourceLoader：默认资源加载器，先从classpath加载，再当作网络资源加载，最后从文件系统中加载
