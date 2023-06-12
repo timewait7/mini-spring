@@ -1,10 +1,9 @@
 package com.tw.minispring.beans.factory;
 
 import com.tw.minispring.beans.BeansException;
+import com.tw.minispring.beans.factory.config.AutowireCapableBeanFactory;
 import com.tw.minispring.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.ListableBeanFactory;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import com.tw.minispring.beans.factory.config.ConfigurableBeanFactory;
 
 /**
  * @Author: linfeng
