@@ -1,7 +1,11 @@
 package com.tw.minispring.ioc;
 
 import cn.hutool.core.io.IoUtil;
+import com.tw.minispring.beans.factory.support.DefaultListableBeanFactory;
+import com.tw.minispring.beans.factory.xml.XmlBeanDefinitionReader;
 import com.tw.minispring.core.io.*;
+import com.tw.minispring.ioc.bean.Car;
+import com.tw.minispring.ioc.bean.Person;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -62,5 +66,22 @@ public class ResourceLoaderTest {
         String content = IoUtil.readUtf8(inputStream);
 
         System.out.println(content);
+    }
+
+    @Test
+    public void testDefineBeanInXml() throws Exception {
+        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
+        reader.loadBeanDefinitions("classpath:spring.xml");
+
+        Person person = (Person) beanFactory.getBean("person");
+        assertThat(person.getName()).isEqualTo("zhang3");
+        assertThat(person.getAge()).isEqualTo(19);
+        assertThat(person.getCar().getBrand()).isEqualTo("porsche");
+
+        Car car = (Car) beanFactory.getBean("car");
+        assertThat(car.getBrand()).isEqualTo("porsche");
+
+        System.out.println(person);
     }
 }
