@@ -44,3 +44,9 @@ bean实例化后需要设置属性，定义PropertyValues来对应bean的属性�
 - UrlResource：网络资源
 - ResourceLoader：资源加载器，根据给定位置获取资源
 - DefaultResourceLoader：默认资源加载器，先从classpath加载，再当作网络资源加载，最后从文件系统中加载
+
+### 07-define-bean-in-xml
+有了资源加载器，就可以在xml文件中定义bean的信息，利用资源加载器加载并解析bean的定义，然后往容器中注入BeanDefinition
+BeanDefinitionReader需要有获取资源和注册BeanDefinition的能力，因此BeanDefinitionReader的抽象实现类AbstractBeanDefinitionReader有ResourceLoader和BeanDefinitionRegistry两个属性。
+
+![](./assets/DefaultListableBeanFactory2.png)
