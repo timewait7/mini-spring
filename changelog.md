@@ -70,3 +70,9 @@ ApplicationContext除了拥有BeanFactory的所有功能外，还支持特殊类
 ![](./assets/ClassPathXmlApplicationContext.png)
 
 AbstractApplicationContext#refresh提供了一个轮廓。
+
+### 10-bean-init-and-destroy
+在Spring中，有三种方式定义bean的初始化方法和销毁方法：
+- 在xml文件中指定init-method和destroy-method
+- 继承InitializingBean和DisposableBean
+- 在方法上加注解@PostConstruct和@PreDestroy
