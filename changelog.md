@@ -50,3 +50,16 @@ bean实例化后需要设置属性，定义PropertyValues来对应bean的属性�
 BeanDefinitionReader需要有获取资源和注册BeanDefinition的能力，因此BeanDefinitionReader的抽象实现类AbstractBeanDefinitionReader有ResourceLoader和BeanDefinitionRegistry两个属性。
 
 ![](./assets/DefaultListableBeanFactory2.png)
+
+### 08-post-processor
+BeanFactoryPostProcessor和BeanPostProcessor是Spring框架中具有重量级地位的两个接口，这两个接口都是Spring提供的容器扩展机制。
+
+BeanFactoryPostProcessor允许在实例化bean之前修改BeanDefinition。
+
+BeanPostProcessor定义了两个方法，分别在bean的初始化方法之前和之后执行。
+
+代码更新：
+- 在ConfigurableBeanFactory中添加addBeanPostProcessor方法
+- AbstractBeanFactory原本实现BeanFactory，现在改为实现ConfigurableBeanFactory，并重写addBeanPostProcessor方法
+- 在AutowireCapableBeanFactory中定义两个方法applyBeanPostProcessorsBeforeInitialization和applyBeanPostProcessorsAfterInitialization
+- 在AbstractAutowireCapableBeanFactory中实现applyBeanPostProcessorsBeforeInitialization和applyBeanPostProcessorsAfterInitialization，定义initializeBean方法，并在doCreateBean方法中调用
