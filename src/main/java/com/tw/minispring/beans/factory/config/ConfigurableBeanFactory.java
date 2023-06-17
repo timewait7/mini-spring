@@ -10,4 +10,6 @@ import com.tw.minispring.beans.factory.support.BeanDefinitionRegistry;
 public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, BeanDefinitionRegistry {
 
     void addBeanPostProcessor(BeanPostProcessor beanPostProcessor);
+
+    void destroySingletons();
 }
