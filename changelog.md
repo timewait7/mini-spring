@@ -63,3 +63,10 @@ BeanPostProcessor定义了两个方法，分别在bean的初始化方法之前�
 - AbstractBeanFactory原本实现BeanFactory，现在改为实现ConfigurableBeanFactory，并重写addBeanPostProcessor方法
 - 在AutowireCapableBeanFactory中定义两个方法applyBeanPostProcessorsBeforeInitialization和applyBeanPostProcessorsAfterInitialization
 - 在AbstractAutowireCapableBeanFactory中实现applyBeanPostProcessorsBeforeInitialization和applyBeanPostProcessorsAfterInitialization，定义initializeBean方法，并在doCreateBean方法中调用
+
+### 09-application-context
+ApplicationContext除了拥有BeanFactory的所有功能外，还支持特殊类型bean（如BeanFactoryPostProcessor、BeanPostProcessor）的自动识别、资源加载、容器事件和监听器、国际化支持、单列bean自动初始化等。
+
+![](./assets/ClassPathXmlApplicationContext.png)
+
+AbstractApplicationContext#refresh提供了一个轮廓。
