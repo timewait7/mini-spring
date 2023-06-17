@@ -1,12 +1,15 @@
 package com.tw.minispring.beans.factory.support;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.StrUtil;
 import com.tw.minispring.beans.BeansException;
 import com.tw.minispring.beans.PropertyValue;
+import com.tw.minispring.beans.factory.DisposableBean;
 import com.tw.minispring.beans.factory.config.AutowireCapableBeanFactory;
 import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.config.BeanPostProcessor;
 import com.tw.minispring.beans.factory.config.BeanReference;
+import org.springframework.context.annotation.Bean;
 
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory implements AutowireCapableBeanFactory {
 
@@ -29,8 +32,17 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             throw new BeansException("Instantiation of bean failed", e);
         }
 
+        // 注册有销毁方法的bean
+        registerDisposableBeanIfNecessary(beanName, bean, beanDefinition);
+
         addSingleton(beanName, bean);
         return bean;
+    }
+
+    protected void registerDisposableBeanIfNecessary(String beanName, Object bean, BeanDefinition beanDefinition) {
+        if (bean instanceof DisposableBean && StrUtil.isNotEmpty(beanDefinition.getDestroyMethodName())) {
+            registerDisposableBean(beanName, new DisposableBeanAdapter(bean, beanName, beanDefinition));
+        }
     }
 
     protected Object createBeanInstance(BeanDefinition beanDefinition) {
