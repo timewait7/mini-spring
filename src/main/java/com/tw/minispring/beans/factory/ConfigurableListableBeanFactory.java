@@ -15,4 +15,6 @@ public interface ConfigurableListableBeanFactory extends ListableBeanFactory, Au
     BeanDefinition getBeanDefinition(String beanName) throws BeansException;
 
     void addBeanPostProcessor(BeanPostProcessor beanPostProcessor);
+
+    void preInstantiateSingletons() throws BeansException;
 }
