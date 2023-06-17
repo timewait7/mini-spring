@@ -1,7 +1,6 @@
 package com.tw.minispring.beans.factory.support;
 
 import com.tw.minispring.beans.BeansException;
-import com.tw.minispring.beans.factory.BeanFactory;
 import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.config.BeanPostProcessor;
 import com.tw.minispring.beans.factory.config.ConfigurableBeanFactory;
@@ -25,7 +24,7 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
     }
 
     @Override
-    public <T> T getBean(String name, Class<T> requiredType) throws org.springframework.beans.BeansException {
+    public <T> T getBean(String name, Class<T> requiredType) throws BeansException {
         return ((T) getBean(name));
     }
 

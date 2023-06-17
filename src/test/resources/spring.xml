@@ -14,4 +14,6 @@
         <property name="brand" value="porsche"/>
     </bean>
 
+    <bean class="com.tw.minispring.ioc.common.CustomBeanFactoryPostProcessor" />
+    <bean class="com.tw.minispring.ioc.common.CustomBeanPostProcessor" />
 </beans>
