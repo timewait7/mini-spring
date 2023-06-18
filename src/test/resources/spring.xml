@@ -16,4 +16,6 @@
 
     <bean class="com.tw.minispring.ioc.common.CustomBeanFactoryPostProcessor" />
     <bean class="com.tw.minispring.ioc.common.CustomBeanPostProcessor" />
+
+    <bean id="helloService" class="com.tw.minispring.ioc.service.HelloService" />
 </beans>

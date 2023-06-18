@@ -2,6 +2,7 @@ package com.tw.minispring.beans.factory.support;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
+import com.tw.minispring.BeanFactoryAware;
 import com.tw.minispring.beans.BeansException;
 import com.tw.minispring.beans.PropertyValue;
 import com.tw.minispring.beans.factory.DisposableBean;
@@ -69,6 +70,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     }
 
     protected Object initializeBean(String beanName, Object bean, BeanDefinition beanDefinition) {
+        if (bean instanceof BeanFactoryAware) {
+            ((BeanFactoryAware) bean).setBeanFactory(this);
+        }
+
         Object wrappedBean = applyBeanPostProcessorsBeforeInitialization(bean, beanName);
 
         invokeInitMethods(beanName, wrappedBean, beanDefinition);
