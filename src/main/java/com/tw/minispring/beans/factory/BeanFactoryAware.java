@@ -1,8 +1,6 @@
-package com.tw.minispring;
+package com.tw.minispring.beans.factory;
 
 import com.tw.minispring.beans.BeansException;
-import com.tw.minispring.beans.factory.Aware;
-import com.tw.minispring.beans.factory.BeanFactory;
 
 /**
  * @Author: linfeng

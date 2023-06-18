@@ -2,7 +2,7 @@ package com.tw.minispring.beans.factory.support;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
-import com.tw.minispring.BeanFactoryAware;
+import com.tw.minispring.beans.factory.BeanFactoryAware;
 import com.tw.minispring.beans.BeansException;
 import com.tw.minispring.beans.PropertyValue;
 import com.tw.minispring.beans.factory.DisposableBean;
@@ -10,7 +10,6 @@ import com.tw.minispring.beans.factory.config.AutowireCapableBeanFactory;
 import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.config.BeanPostProcessor;
 import com.tw.minispring.beans.factory.config.BeanReference;
-import org.springframework.context.annotation.Bean;
 
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory implements AutowireCapableBeanFactory {
 

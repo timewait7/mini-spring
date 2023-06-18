@@ -1,6 +1,6 @@
 package com.tw.minispring.ioc.service;
 
-import com.tw.minispring.BeanFactoryAware;
+import com.tw.minispring.beans.factory.BeanFactoryAware;
 import com.tw.minispring.beans.BeansException;
 import com.tw.minispring.beans.factory.BeanFactory;
 import com.tw.minispring.context.ApplicationContext;
