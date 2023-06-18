@@ -1,4 +1,4 @@
-package com.tw.minispring.ioc.service;
+package com.tw.minispring.ioc;
 
 import com.tw.minispring.context.support.ClassPathXmlApplicationContext;
 import org.junit.jupiter.api.Test;
