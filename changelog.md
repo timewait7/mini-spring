@@ -83,3 +83,6 @@ AbstractApplicationContext#refresh提供了一个轮廓。
 在BeanDefinition中新增描述bean作用的字段scope，创建prototype作用bean时，不会将其添加到singletonObjects。
 
 此外，prototype作用域的bean也不需要执行销毁方法，所以无需将其加入disposableBeans。
+
+### 13-factory-bean 
+FactoryBean是一种特殊的bean，当向容器获取该bean是，返回的不是该bean，而是返回该bean的getObject方法的返回值。
