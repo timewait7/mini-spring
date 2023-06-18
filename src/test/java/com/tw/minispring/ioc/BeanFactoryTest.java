@@ -1,13 +1,13 @@
 package com.tw.minispring.ioc;
 
+import com.tw.minispring.bean.Car;
+import com.tw.minispring.bean.Person;
 import com.tw.minispring.beans.PropertyValue;
 import com.tw.minispring.beans.PropertyValues;
 import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.config.BeanReference;
 import com.tw.minispring.beans.factory.support.DefaultListableBeanFactory;
-import com.tw.minispring.ioc.bean.Car;
-import com.tw.minispring.ioc.bean.Person;
-import com.tw.minispring.ioc.service.HelloService;
+import com.tw.minispring.service.HelloService;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

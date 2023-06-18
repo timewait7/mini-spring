@@ -4,13 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="person" class="com.tw.minispring.ioc.bean.Person"
+    <bean id="person" class="com.tw.minispring.bean.Person"
           init-method="customInitMethod" destroy-method="customDestroyMethod">
         <property name="name" value="derek"/>
         <property name="car" ref="car"/>
     </bean>
 
-    <bean id="car" class="com.tw.minispring.ioc.bean.Car">
+    <bean id="car" class="com.tw.minispring.bean.Car">
         <property name="brand" value="porsche"/>
     </bean>
 

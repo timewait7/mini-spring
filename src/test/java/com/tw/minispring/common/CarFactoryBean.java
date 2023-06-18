@@ -1,7 +1,7 @@
-package com.tw.minispring.ioc.common;
+package com.tw.minispring.common;
 
 import com.tw.minispring.beans.factory.xml.FactoryBean;
-import com.tw.minispring.ioc.bean.Car;
+import com.tw.minispring.bean.Car;
 
 /**
  * @Author: linfeng

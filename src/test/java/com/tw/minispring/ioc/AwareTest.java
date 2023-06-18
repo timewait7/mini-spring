@@ -1,7 +1,7 @@
 package com.tw.minispring.ioc;
 
 import com.tw.minispring.context.support.ClassPathXmlApplicationContext;
-import com.tw.minispring.ioc.service.HelloService;
+import com.tw.minispring.service.HelloService;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

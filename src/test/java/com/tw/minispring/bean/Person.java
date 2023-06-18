@@ -1,4 +1,4 @@
-package com.tw.minispring.ioc.bean;
+package com.tw.minispring.bean;
 
 import com.tw.minispring.beans.factory.DisposableBean;
 import com.tw.minispring.beans.factory.InitializingBean;

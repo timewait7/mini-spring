@@ -1,4 +1,4 @@
-package com.tw.minispring.ioc.service;
+package com.tw.minispring.service;
 
 import com.tw.minispring.beans.factory.BeanFactoryAware;
 import com.tw.minispring.beans.BeansException;

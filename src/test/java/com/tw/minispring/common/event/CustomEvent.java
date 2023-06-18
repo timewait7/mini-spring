@@ -1,4 +1,4 @@
-package com.tw.minispring.ioc.common.event;
+package com.tw.minispring.common.event;
 
 import com.tw.minispring.context.event.ApplicationContextEvent;
 

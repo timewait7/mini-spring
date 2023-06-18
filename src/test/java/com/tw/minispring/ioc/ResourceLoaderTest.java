@@ -4,8 +4,8 @@ import cn.hutool.core.io.IoUtil;
 import com.tw.minispring.beans.factory.support.DefaultListableBeanFactory;
 import com.tw.minispring.beans.factory.xml.XmlBeanDefinitionReader;
 import com.tw.minispring.core.io.*;
-import com.tw.minispring.ioc.bean.Car;
-import com.tw.minispring.ioc.bean.Person;
+import com.tw.minispring.bean.Car;
+import com.tw.minispring.bean.Person;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.tw.minispring.ioc.common;
+package com.tw.minispring.common;
 
 import com.tw.minispring.beans.BeansException;
 import com.tw.minispring.beans.PropertyValue;

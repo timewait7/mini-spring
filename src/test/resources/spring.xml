@@ -4,18 +4,18 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="person" class="com.tw.minispring.ioc.bean.Person">
+    <bean id="person" class="com.tw.minispring.bean.Person">
         <property name="name" value="zhang3"/>
         <property name="age" value="19" />
         <property name="car" ref="car"/>
     </bean>
 
-    <bean id="car" class="com.tw.minispring.ioc.bean.Car">
+    <bean id="car" class="com.tw.minispring.bean.Car">
         <property name="brand" value="porsche"/>
     </bean>
 
-    <bean class="com.tw.minispring.ioc.common.CustomBeanFactoryPostProcessor" />
-    <bean class="com.tw.minispring.ioc.common.CustomBeanPostProcessor" />
+    <bean class="com.tw.minispring.common.CustomBeanFactoryPostProcessor" />
+    <bean class="com.tw.minispring.common.CustomBeanPostProcessor" />
 
-    <bean id="helloService" class="com.tw.minispring.ioc.service.HelloService" />
+    <bean id="helloService" class="com.tw.minispring.service.HelloService" />
 </beans>

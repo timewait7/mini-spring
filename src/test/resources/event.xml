@@ -4,9 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.tw.minispring.ioc.common.event.ContextRefreshedEventListener"/>
+    <bean class="com.tw.minispring.common.event.ContextRefreshedEventListener"/>
 
-    <bean class="com.tw.minispring.ioc.common.event.CustomEventListener"/>
+    <bean class="com.tw.minispring.common.event.CustomEventListener"/>
 
-    <bean class="com.tw.minispring.ioc.common.event.ContextClosedEventListener"/>
+    <bean class="com.tw.minispring.common.event.ContextClosedEventListener"/>
 </beans>
