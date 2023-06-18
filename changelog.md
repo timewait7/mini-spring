@@ -76,3 +76,5 @@ AbstractApplicationContext#refresh提供了一个轮廓。
 - 在xml文件中指定init-method和destroy-method
 - 继承InitializingBean和DisposableBean
 - 在方法上加注解@PostConstruct和@PreDestroy
+
+### 11-aware 
