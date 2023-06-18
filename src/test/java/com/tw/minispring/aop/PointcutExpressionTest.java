@@ -16,7 +16,7 @@ public class PointcutExpressionTest {
 
     @Test
     public void testPointcutExpression() throws Exception {
-        AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut("execution(* com.tw.minispring.service.*(..))");
+        AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut("execution(* com.tw.minispring.service.HelloService.*(..))");
         Class<HelloService> clazz = HelloService.class;
         Method method = clazz.getDeclaredMethod("sayHello");
         assertThat(pointcut.matches(clazz)).isTrue();
