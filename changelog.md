@@ -78,3 +78,8 @@ AbstractApplicationContext#refresh提供了一个轮廓。
 - 在方法上加注解@PostConstruct和@PreDestroy
 
 ### 11-aware 
+
+### 12-prototype-scope 
+在BeanDefinition中新增描述bean作用的字段scope，创建prototype作用bean时，不会将其添加到singletonObjects。
+
+此外，prototype作用域的bean也不需要执行销毁方法，所以无需将其加入disposableBeans。
