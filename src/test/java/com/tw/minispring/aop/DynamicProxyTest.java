@@ -1,6 +1,7 @@
 package com.tw.minispring.aop;
 
 import com.tw.minispring.aop.aspectj.AspectJExpressionPointcut;
+import com.tw.minispring.aop.aspectj.AspectJExpressionPointcutAdvisor;
 import com.tw.minispring.aop.framework.CglibAopProxy;
 import com.tw.minispring.aop.framework.JdkDynamicAopProxy;
 import com.tw.minispring.aop.framework.ProxyFactory;
@@ -9,6 +10,7 @@ import com.tw.minispring.common.WorldServiceBeforeAdvice;
 import com.tw.minispring.common.WorldServiceInterceptor;
 import com.tw.minispring.service.WorldService;
 import com.tw.minispring.service.WorldServiceImpl;
+import org.aopalliance.intercept.MethodInterceptor;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,5 +68,27 @@ public class DynamicProxyTest {
 
         WorldService proxy = (WorldService) new ProxyFactory(advisedSupport).getProxy();
         proxy.explode();
+    }
+
+    @Test
+    public void testAdvisor() throws Exception {
+        WorldService worldService = new WorldServiceImpl();
+
+        AspectJExpressionPointcutAdvisor advisor = new AspectJExpressionPointcutAdvisor();
+        String expression = "execution(* com.tw.minispring.service.WorldService.explode(..))";
+        advisor.setExpression(expression);
+        MethodBeforeAdviceInterceptor methodInterceptor = new MethodBeforeAdviceInterceptor(new WorldServiceBeforeAdvice());
+        advisor.setAdvice(methodInterceptor);
+
+        ClassFilter classFilter = advisor.getPointcut().getClassFilter();
+        if (classFilter.matches(worldService.getClass())) {
+            AdvisedSupport advisedSupport = new AdvisedSupport();
+            TargetSource targetSource = new TargetSource(worldService);
+            advisedSupport.setTargetSource(targetSource);
+            advisedSupport.setMethodInterceptor((MethodInterceptor) advisor.getAdvice());
+            advisedSupport.setMethodMatcher(advisor.getPointcut().getMethodMatcher());
+            WorldService proxy = (WorldService) new ProxyFactory(advisedSupport).getProxy();
+            proxy.explode();
+        }
     }
 }
