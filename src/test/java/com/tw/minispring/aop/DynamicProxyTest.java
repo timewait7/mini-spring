@@ -4,6 +4,8 @@ import com.tw.minispring.aop.aspectj.AspectJExpressionPointcut;
 import com.tw.minispring.aop.framework.CglibAopProxy;
 import com.tw.minispring.aop.framework.JdkDynamicAopProxy;
 import com.tw.minispring.aop.framework.ProxyFactory;
+import com.tw.minispring.aop.framework.adapter.MethodBeforeAdviceInterceptor;
+import com.tw.minispring.common.WorldServiceBeforeAdvice;
 import com.tw.minispring.common.WorldServiceInterceptor;
 import com.tw.minispring.service.WorldService;
 import com.tw.minispring.service.WorldServiceImpl;
@@ -53,6 +55,16 @@ public class DynamicProxyTest {
         // 使用CGLIB动态代理
         advisedSupport.setProxyTargetClass(true);
         proxy = (WorldService) new ProxyFactory(advisedSupport).getProxy();
+        proxy.explode();
+    }
+
+    @Test
+    public void testBeforeAdvice() throws Exception {
+        WorldServiceBeforeAdvice beforeAdvice = new WorldServiceBeforeAdvice();
+        MethodBeforeAdviceInterceptor methodInterceptor = new MethodBeforeAdviceInterceptor(beforeAdvice);
+        advisedSupport.setMethodInterceptor(methodInterceptor);
+
+        WorldService proxy = (WorldService) new ProxyFactory(advisedSupport).getProxy();
         proxy.explode();
     }
 }
