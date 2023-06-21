@@ -95,3 +95,6 @@ ApplicationEventMulticaster是注册监听器和发布事件的抽象接口，Ab
 ### 16-jdk-dynamic-proxy 
 
 ### 17-cglib-dynamic-proxy 
+
+### 18-proxy-factory
+增加AOP代理工厂ProxyFactory，根据AdvisedSupport#proxyTargetClass属性决定使用JDK动态代理还是CGLIB动态代理
