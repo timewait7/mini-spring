@@ -98,3 +98,6 @@ ApplicationEventMulticaster是注册监听器和发布事件的抽象接口，Ab
 
 ### 18-proxy-factory
 增加AOP代理工厂ProxyFactory，根据AdvisedSupport#proxyTargetClass属性决定使用JDK动态代理还是CGLIB动态代理
+
+### 19-advice 
+Spring对AOP Alliance中的Advice进行了细化，如BeforeAdvice、AfterAdvice、AfterReturningAdvice、ThrowsAdvice，这里暂时只实现BeforeAdvice。
