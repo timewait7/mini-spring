@@ -105,3 +105,5 @@ Spring对AOP Alliance中的Advice进行了细化，如BeforeAdvice、AfterAdvice
 ### 20-pointcut-advisor
 
 ### 21-auto-proxy
+
+### 22-property-placeholder
