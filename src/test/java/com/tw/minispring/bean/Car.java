@@ -1,9 +1,12 @@
 package com.tw.minispring.bean;
 
+import com.tw.minispring.stereotype.Component;
+
 /**
  * @Author: linfeng
  * @Date: 2023/6/11 4:15 下午
  */
+@Component
 public class Car {
 
     private String brand;
