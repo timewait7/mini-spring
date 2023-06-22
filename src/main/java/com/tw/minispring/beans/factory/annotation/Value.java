@@ -1,4 +1,4 @@
-package com.tw.minispring.context.annotation;
+package com.tw.minispring.beans.factory.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

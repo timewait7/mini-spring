@@ -2,17 +2,21 @@ package com.tw.minispring.bean;
 
 import com.tw.minispring.beans.factory.DisposableBean;
 import com.tw.minispring.beans.factory.InitializingBean;
+import com.tw.minispring.beans.factory.annotation.Autowired;
+import com.tw.minispring.stereotype.Component;
 
 /**
  * @Author: linfeng
  * @Date: 2023/6/11 11:19 上午
  */
+@Component
 public class Person implements InitializingBean, DisposableBean {
 
     private String name;
 
     private int age;
 
+    @Autowired
     private Car car;
 
     public String getName() {

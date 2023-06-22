@@ -1,6 +1,7 @@
 package com.tw.minispring.context.annotation;
 
 import cn.hutool.core.util.StrUtil;
+import com.tw.minispring.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.support.BeanDefinitionRegistry;
 import com.tw.minispring.stereotype.Component;

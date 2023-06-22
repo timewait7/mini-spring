@@ -109,3 +109,7 @@ Spring对AOP Alliance中的Advice进行了细化，如BeforeAdvice、AfterAdvice
 ### 22-property-placeholder
 
 ### 23-package-scan
+
+### 24-@Value 
+
+### 25-@Autowired

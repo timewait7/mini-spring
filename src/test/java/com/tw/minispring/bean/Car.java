@@ -1,6 +1,6 @@
 package com.tw.minispring.bean;
 
-import com.tw.minispring.context.annotation.Value;
+import com.tw.minispring.beans.factory.annotation.Value;
 import com.tw.minispring.stereotype.Component;
 
 /**
