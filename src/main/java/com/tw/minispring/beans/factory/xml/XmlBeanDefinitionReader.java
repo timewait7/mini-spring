@@ -7,6 +7,7 @@ import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.config.BeanReference;
 import com.tw.minispring.beans.factory.support.AbstractBeanDefinitionReader;
 import com.tw.minispring.beans.factory.support.BeanDefinitionRegistry;
+import com.tw.minispring.context.annotation.ClassPathBeanDefinitionScanner;
 import com.tw.minispring.core.io.Resource;
 import com.tw.minispring.core.io.ResourceLoader;
 import org.dom4j.Document;
@@ -35,6 +36,8 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     public static final String INIT_METHOD_ATTRIBUTE = "init-method";
     public static final String DESTROY_METHOD_ATTRIBUTE = "destroy-method";
     public static final String SCOPE_ATTRIBUTE = "scope";
+    public static final String BASE_PACKAGE_ATTRIBUTE = "base-package";
+    public static final String COMPONENT_SCAN_ELEMENT = "component-scan";
 
     public XmlBeanDefinitionReader(BeanDefinitionRegistry registry) {
         super(registry);
@@ -70,6 +73,16 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         Document document = reader.read(inputStream);
 
         Element root = document.getRootElement();
+
+        Element componentScan = root.element(COMPONENT_SCAN_ELEMENT);
+        if (componentScan != null) {
+            String scanPath = componentScan.attributeValue(BASE_PACKAGE_ATTRIBUTE);
+            if (StrUtil.isEmpty(scanPath)) {
+                throw new BeansException("The value of base-package attribute can not be empty or null");
+            }
+            scanPackage(scanPath);
+        }
+
         List<Element> beans = root.elements(BEAN_ELEMENT);
         for (Element bean : beans) {
             String beanId = bean.attributeValue(ID_ATTRIBUTE);
@@ -122,5 +135,11 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
             getRegistry().registerBeanDefinition(beanName, beanDefinition);
         }
+    }
+
+    private void scanPackage(String scanPath) {
+        String[] basePackages = StrUtil.splitToArray(scanPath, ",");
+        ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(getRegistry());
+        scanner.doScan(basePackages);
     }
 }
