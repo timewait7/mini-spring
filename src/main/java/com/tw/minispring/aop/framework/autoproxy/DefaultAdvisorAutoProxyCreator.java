@@ -4,6 +4,7 @@ import com.tw.minispring.aop.*;
 import com.tw.minispring.aop.aspectj.AspectJExpressionPointcutAdvisor;
 import com.tw.minispring.aop.framework.ProxyFactory;
 import com.tw.minispring.beans.BeansException;
+import com.tw.minispring.beans.PropertyValues;
 import com.tw.minispring.beans.factory.BeanFactory;
 import com.tw.minispring.beans.factory.BeanFactoryAware;
 import com.tw.minispring.beans.factory.config.InstantiationAwareBeanPostProcessor;
@@ -60,6 +61,11 @@ public class DefaultAdvisorAutoProxyCreator implements InstantiationAwareBeanPos
             throw new BeansException("Error create proxy bean for: " + beanName, e);
         }
         return null;
+    }
+
+    @Override
+    public PropertyValues postProcessPropertyValues(PropertyValues pvs, Object bean, String beanName) throws BeansException {
+        return pvs;
     }
 
     private boolean isInfrastructureClass(Class<?> beanClass) {

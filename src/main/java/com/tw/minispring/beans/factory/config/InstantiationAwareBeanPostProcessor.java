@@ -1,6 +1,7 @@
 package com.tw.minispring.beans.factory.config;
 
 import com.tw.minispring.beans.BeansException;
+import com.tw.minispring.beans.PropertyValues;
 
 /**
  * @Author: linfeng
@@ -9,4 +10,6 @@ import com.tw.minispring.beans.BeansException;
 public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 
     Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException;
+
+    PropertyValues postProcessPropertyValues(PropertyValues pvs, Object bean, String beanName) throws BeansException;
 }

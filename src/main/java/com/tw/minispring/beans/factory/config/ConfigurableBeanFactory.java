@@ -1,7 +1,7 @@
 package com.tw.minispring.beans.factory.config;
 
 import com.tw.minispring.beans.factory.HierarchicalBeanFactory;
-import com.tw.minispring.beans.factory.support.BeanDefinitionRegistry;
+import com.tw.minispring.util.StringValueResolver;
 
 /**
  * @Author: linfeng
@@ -12,4 +12,8 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
     void addBeanPostProcessor(BeanPostProcessor beanPostProcessor);
 
     void destroySingletons();
+
+    void addEmbeddedValueResolver(StringValueResolver valueResolver);
+
+    String resolveEmbeddedValue(String value);
 }

@@ -4,7 +4,6 @@ import cn.hutool.core.util.StrUtil;
 import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.support.BeanDefinitionRegistry;
 import com.tw.minispring.stereotype.Component;
-import org.springframework.context.annotation.Bean;
 
 import java.util.Set;
 
@@ -13,6 +12,8 @@ import java.util.Set;
  * @Date: 2023/6/22 5:32 下午
  */
 public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateComponentProvider {
+
+    public static final String AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME = "com.tw.minispring.context.annotation.internalAutowiredAnnotationProcessor";
 
     private BeanDefinitionRegistry registry;
 
@@ -32,6 +33,9 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
                 registry.registerBeanDefinition(beanName, candidate);
             }
         }
+
+        // 注册处理@Autowired和@Value注解的BeanPostProcessor
+        registry.registerBeanDefinition(AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME, new BeanDefinition(AutowiredAnnotationBeanPostProcessor.class));
     }
 
     private String resolveBeanScope(BeanDefinition beanDefinition) {

@@ -8,6 +8,7 @@ import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.config.BeanFactoryPostProcessor;
 import com.tw.minispring.core.io.DefaultResourceLoader;
 import com.tw.minispring.core.io.Resource;
+import com.tw.minispring.util.StringValueResolver;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -26,8 +27,13 @@ public class PropertyPlaceholderConfigurer implements BeanFactoryPostProcessor {
 
     @Override
     public void postProcessorBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        // 加载属性配置文件
         Properties properties = loadProperties();
+        // 替换占位符
         processProperties(beanFactory, properties);
+        // 往容器中添加字符解析器，供解析@Value注解使用
+        PlaceHolderResolvingStringValueResolver valueResolver = new PlaceHolderResolvingStringValueResolver(properties);
+        beanFactory.addEmbeddedValueResolver(valueResolver);
     }
 
     private Properties loadProperties() {
@@ -55,21 +61,40 @@ public class PropertyPlaceholderConfigurer implements BeanFactoryPostProcessor {
         for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
             Object value = propertyValue.getValue();
             if (value instanceof String) {
-                String strVal = (String) value;
-                StringBuffer buf = new StringBuffer(strVal);
-                int startIndex = strVal.indexOf(PLACEHOLDER_PREFIX);
-                int endIndex = strVal.indexOf(PLACEHOLDER_SUFFIX);
-                if (startIndex != -1 && endIndex != -1 && startIndex < endIndex) {
-                    String propKey = strVal.substring(startIndex + 2, endIndex);
-                    String propVal = properties.getProperty(propKey);
-                    buf.replace(startIndex, endIndex + 1, propVal);
-                    propertyValues.addPropertyValue(new PropertyValue(propertyValue.getName(), buf.toString()));
-                }
+                value = resolvePlaceholder((String) value, properties);
+                propertyValues.addPropertyValue(new PropertyValue(propertyValue.getName(), value));
             }
         }
     }
 
+    private String resolvePlaceholder(String value, Properties properties) {
+        String strVal = (String) value;
+        StringBuffer buf = new StringBuffer(strVal);
+        int startIndex = strVal.indexOf(PLACEHOLDER_PREFIX);
+        int endIndex = strVal.indexOf(PLACEHOLDER_SUFFIX);
+        if (startIndex != -1 && endIndex != -1 && startIndex < endIndex) {
+            String propKey = strVal.substring(startIndex + 2, endIndex);
+            String propVal = properties.getProperty(propKey);
+            buf.replace(startIndex, endIndex + 1, propVal);
+        }
+        return buf.toString();
+    }
+
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    private class PlaceHolderResolvingStringValueResolver implements StringValueResolver {
+
+        private final Properties properties;
+
+        public PlaceHolderResolvingStringValueResolver(Properties properties) {
+            this.properties = properties;
+        }
+
+        @Override
+        public String resolveStringValue(String strVal) {
+            return PropertyPlaceholderConfigurer.this.resolvePlaceholder(strVal, properties);
+        }
     }
 }

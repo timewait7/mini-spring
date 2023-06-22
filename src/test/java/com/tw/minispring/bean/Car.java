@@ -1,5 +1,6 @@
 package com.tw.minispring.bean;
 
+import com.tw.minispring.context.annotation.Value;
 import com.tw.minispring.stereotype.Component;
 
 /**
@@ -9,6 +10,7 @@ import com.tw.minispring.stereotype.Component;
 @Component
 public class Car {
 
+    @Value("${brand}")
     private String brand;
 
     public String getBrand() {
