@@ -14,10 +14,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CircularReferenceTest {
 
     @Test
-    public void testCircularReference() {
+    public void testCircularReferenceWithoutProxyBean() {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:circular-reference-without-proxy-bean.xml");
         A a = applicationContext.getBean("a", A.class);
         B b = applicationContext.getBean("b", B.class);
         assertThat(a.getB() == b).isTrue();
+    }
+
+    @Test
+    public void testCircularReferenceWithProxyBean() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:circular-reference-with-proxy-bean.xml");
+        A a = applicationContext.getBean("a", A.class);
+        B b = applicationContext.getBean("b", B.class);
+
+        assertThat(b.getA() != a).isTrue();
     }
 }

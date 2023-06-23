@@ -119,3 +119,5 @@ Spring对AOP Alliance中的Advice进行了细化，如BeforeAdvice、AfterAdvice
 ### 27-type-conversion
 
 ### 28-circular-reference-without-proxy-bean 
+
+### 29-circular-reference-with-proxy-bean

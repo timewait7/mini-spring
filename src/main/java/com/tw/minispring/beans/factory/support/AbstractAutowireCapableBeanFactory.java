@@ -8,6 +8,7 @@ import com.tw.minispring.beans.factory.BeanFactoryAware;
 import com.tw.minispring.beans.BeansException;
 import com.tw.minispring.beans.PropertyValue;
 import com.tw.minispring.beans.factory.DisposableBean;
+import com.tw.minispring.beans.factory.ObjectFactory;
 import com.tw.minispring.beans.factory.config.*;
 import com.tw.minispring.core.convert.ConversionService;
 
@@ -51,7 +52,15 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             bean = createBeanInstance(beanDefinition);
 
             // 为解决循环依赖问题，将实例化后的bean放进缓存中提前暴露
-            earlySingletonObjects.put(beanName, bean);
+            if (beanDefinition.isSingleton()) {
+                Object finalBean = bean;
+                addSingletonFactory(beanName, new ObjectFactory<Object>() {
+                    @Override
+                    public Object getObject() throws BeansException {
+                        return getEarlyBeanReference(beanName, beanDefinition, finalBean);
+                    }
+                });
+            }
 
             // 在设置bean属性之前，允许BeanPostProcessor修改属性值
             applyBeanPostProcessorsBeforeApplyingPropertyValues(beanName, bean, beanDefinition);
@@ -66,10 +75,25 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         // 注册有销毁方法的bean
         registerDisposableBeanIfNecessary(beanName, bean, beanDefinition);
 
+        Object exposedBean = bean;
         if (beanDefinition.isSingleton()) {
+            exposedBean = getSingleton(beanName);
             addSingleton(beanName, bean);
         }
-        return bean;
+        return exposedBean;
+    }
+
+    protected Object getEarlyBeanReference(String beanName, BeanDefinition beanDefinition, Object bean) {
+        Object exposedBean = bean;
+        for (BeanPostProcessor processor : getBeanPostProcessors()) {
+            if (processor instanceof InstantiationAwareBeanPostProcessor) {
+                ((InstantiationAwareBeanPostProcessor) processor).getEarlyBeanReference(exposedBean, beanName);
+                if (exposedBean == null) {
+                    return null;
+                }
+            }
+        }
+        return exposedBean;
     }
 
     protected void applyBeanPostProcessorsBeforeApplyingPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
