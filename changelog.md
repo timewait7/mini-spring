@@ -113,3 +113,7 @@ Spring对AOP Alliance中的Advice进行了细化，如BeforeAdvice、AfterAdvice
 ### 24-@Value 
 
 ### 25-@Autowired
+
+### 26-bugfix
+
+### 27-type-conversion

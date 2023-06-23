@@ -10,6 +10,7 @@ import com.tw.minispring.context.ConfigurableApplicationContext;
 import com.tw.minispring.context.event.ApplicationEventMulticaster;
 import com.tw.minispring.context.event.ContextRefreshedEvent;
 import com.tw.minispring.context.event.SimpleApplicationEventMulticaster;
+import com.tw.minispring.core.convert.ConversionService;
 import com.tw.minispring.core.io.DefaultResourceLoader;
 
 import java.util.Collection;
@@ -22,6 +23,8 @@ import java.util.Map;
 public abstract class AbstractApplicationContext extends DefaultResourceLoader implements ConfigurableApplicationContext {
 
     public static final String APPLICATION_EVENT_MULTICASTER_BEAN_NAME = "applicationEventMulticaster";
+
+    private static final String CONVERSION_SERVICE_BEAN_NAME = "conversionService";
 
     private ApplicationEventMulticaster applicationEventMulticaster;
 
@@ -47,11 +50,23 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
         // 注册事件监听器
         registerListeners();
 
-        // 提前实例化单例bean
-        beanFactory.preInstantiateSingletons();
+        // 注册类型转换器和提前实例化单例bean
+        finishBeanFactoryInitialization(beanFactory);
 
         // 发布容器刷新完成事件
         finishRefresh();
+    }
+
+    protected void finishBeanFactoryInitialization(ConfigurableListableBeanFactory beanFactory) {
+        if (beanFactory.containsBean(CONVERSION_SERVICE_BEAN_NAME)) {
+            Object conversionService = beanFactory.getBean(CONVERSION_SERVICE_BEAN_NAME);
+            if (conversionService instanceof ConversionService) {
+                beanFactory.setConversionService((ConversionService) conversionService);
+            }
+        }
+
+        // 提前实例化单例bean
+        beanFactory.preInstantiateSingletons();
     }
 
     /**
@@ -106,6 +121,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
     @Override
     public void publishEvent(ApplicationEvent event) {
         applicationEventMulticaster.multicastEvent(event);
+    }
+
+    @Override
+    public boolean containsBean(String name) {
+        return getBeanFactory().containsBean(name);
     }
 
     @Override

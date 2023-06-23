@@ -5,6 +5,7 @@ import com.tw.minispring.beans.factory.config.BeanDefinition;
 import com.tw.minispring.beans.factory.config.BeanPostProcessor;
 import com.tw.minispring.beans.factory.config.ConfigurableBeanFactory;
 import com.tw.minispring.beans.factory.xml.FactoryBean;
+import com.tw.minispring.core.convert.ConversionService;
 import com.tw.minispring.util.StringValueResolver;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
     private final Map<String, Object> factoryBeanObjectCache = new HashMap<>();
 
     private final List<StringValueResolver> embeddedValueResolvers = new ArrayList<>();
+
+    private ConversionService conversionService;
 
     @Override
     public Object getBean(String beanName) throws BeansException {
@@ -58,6 +61,13 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
         return ((T) getBean(name));
     }
 
+    @Override
+    public boolean containsBean(String name) {
+        return containsBeanDefinition(name);
+    }
+
+    protected abstract boolean containsBeanDefinition(String beanName);
+
     protected abstract Object createBean(String beanName, BeanDefinition beanDefinition) throws BeansException;
 
     protected abstract BeanDefinition getBeanDefinition(String beanName) throws BeansException;
@@ -84,5 +94,15 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
             result = resolver.resolveStringValue(result);
         }
         return result;
+    }
+
+    @Override
+    public ConversionService getConversionService() {
+        return conversionService;
+    }
+
+    @Override
+    public void setConversionService(ConversionService conversionService) {
+        this.conversionService = conversionService;
     }
 }

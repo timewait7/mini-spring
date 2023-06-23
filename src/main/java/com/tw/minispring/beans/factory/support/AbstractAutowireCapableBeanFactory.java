@@ -2,12 +2,14 @@ package com.tw.minispring.beans.factory.support;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.TypeUtil;
 import com.tw.minispring.beans.PropertyValues;
 import com.tw.minispring.beans.factory.BeanFactoryAware;
 import com.tw.minispring.beans.BeansException;
 import com.tw.minispring.beans.PropertyValue;
 import com.tw.minispring.beans.factory.DisposableBean;
 import com.tw.minispring.beans.factory.config.*;
+import com.tw.minispring.core.convert.ConversionService;
 
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory implements AutowireCapableBeanFactory {
 
@@ -100,6 +102,16 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                 if (value instanceof BeanReference) {
                     BeanReference beanReference = (BeanReference) value;
                     value = getBean(beanReference.getBeanName());
+                } else {
+                    // 类型转换
+                    Class<?> sourceType = value.getClass();
+                    Class<?> targetType = (Class<?>) TypeUtil.getFieldType(bean.getClass(), name);
+                    ConversionService conversionService = getConversionService();
+                    if (conversionService != null) {
+                        if (conversionService.canConvert(sourceType, targetType)) {
+                            value = conversionService.convert(value, targetType);
+                        }
+                    }
                 }
 
                 // 通过反射设置属性
